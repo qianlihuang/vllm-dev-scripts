@@ -60,6 +60,13 @@ if [ ! -d "FlashMLA-a6ec2ba" ]; then
 else
     echo "[5/6] FlashMLA already exists, skipping."
 fi
+# FlashMLA has csrc/cutlass as a git submodule. Reuse the CUTLASS from step 1
+# via symlink to avoid network issues with submodule clone.
+if [ ! -f "FlashMLA-a6ec2ba/csrc/cutlass/include/cutlass/bfloat16.h" ]; then
+    echo "[5/6] Linking FlashMLA submodule: csrc/cutlass -> cutlass-4.4.2"
+    rm -rf FlashMLA-a6ec2ba/csrc/cutlass
+    ln -sf "$TARGET/cutlass-4.4.2" FlashMLA-a6ec2ba/csrc/cutlass
+fi
 
 # 6. QuTLASS
 if [ ! -d "qutlass-830d2c4" ]; then
