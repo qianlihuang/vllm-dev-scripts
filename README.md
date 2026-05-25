@@ -23,7 +23,8 @@ cmake -B build -G Ninja \
   -DCMAKE_CUDA_COMPILER=$(which nvcc)
 cmake --build build
 
-pip install -e . --no-build-isolation --config-settings="--build-option=--build-base=$TARGET/build" -v
+cd /vllm-workspace/vllm
+pip install -e . --no-build-isolation -v
 
 
 
