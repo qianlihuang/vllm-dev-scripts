@@ -24,6 +24,8 @@ cmake -B build -G Ninja \
 cmake --build build
 
 cd /vllm-workspace/vllm
+cp build/*.abi3.so vllm/
+
 pip install -e . --no-build-isolation -v
 
 
